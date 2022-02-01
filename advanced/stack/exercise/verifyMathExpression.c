@@ -82,7 +82,6 @@ int verifyPair(char close, char open) {
   }
 }
 
-
 int checkMathExpression(char expression[]) {
   int i = 0;
   Node * remove, * stack = NULL;
@@ -95,12 +94,18 @@ int checkMathExpression(char expression[]) {
     else if (expression[i] == ']' || expression[i] == ')' || expression[i] == '}') {
       remove = pop(&stack);
 
-      if (verifyPair(expression[i], remove->character) == 0) {
+      if (remove) {
+        if (verifyPair(expression[i], remove->character) == 0) {
+          printf("\tEXPRESSAO MAL FORMADA\n");
+          return 1;
+        }
+
+        free(remove);
+      }
+      else {
         printf("\tEXPRESSAO MAL FORMADA\n");
         return 1;
       }
-
-      free(remove);
     }
 
     i++;
