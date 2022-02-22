@@ -86,6 +86,37 @@ void insertMiddle(List * list, int num, int element) {
   }
 }
 
+void insertSequence(List * list, int num) {
+  Node * aux, * new = malloc(sizeof(Node));
+
+  if (new) {
+    new->value = num;
+
+    if (list->begin == NULL) {
+      new->next = NULL;
+      list->begin = new;
+    }
+    else if (new->value < list->begin->value) {
+      new->next = list->begin;
+      list->begin = new;
+    }
+    else {
+      aux = list->begin;
+
+      while (aux->next && new->value > aux->next->value)
+        aux = aux->next;
+
+      new->next = aux->next;
+      aux->next = new;
+    }
+
+    list->tam++;
+  }
+  else {
+    printf("\nErro ao alocar memoria.\n");
+  }
+}
+
 void printList(List list) {
   Node * node = list.begin;
 
@@ -100,13 +131,13 @@ void printList(List list) {
 int main() {
   setlocale(LC_ALL, "Portuguese");
 
-  int code, value, before;
+  int code, value, element;
   List list;
 
   createList(&list);
 
   do {
-    printf("\n\t0 - Sair\n\t1 - InserirI\n\t2 - inserirF\n\t3 - InserirM\n\t4 - Imprimir\n");
+    printf("\n\t0 - Sair\n\t1 - InserirI\n\t2 - InserirF\n\t3 - InserirM\n\t4 - InserirOrdenado\n\t5 - Imprimir\n");
     printf("Code: ");
     scanf("%d", &code);
 
@@ -127,12 +158,19 @@ int main() {
 
     case 3:
       printf("Digite um valor e o valor de referencia: ");
-      scanf("%d%d", &value, &before);
+      scanf("%d%d", &value, &element);
 
-      insertMiddle(&list, value, before);
+      insertMiddle(&list, value, element);
       break;
 
     case 4:
+      printf("Digite um valor: ");
+      scanf("%d", &value);
+
+      insertSequence(&list, value);
+      break;
+
+    case 5:
       printList(list);
       break;
 

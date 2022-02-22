@@ -73,6 +73,34 @@ void insertMiddle(Node ** list, int num, int element) {
   }
 }
 
+void insertSequence(Node ** list, int num) {
+  Node * aux, * new = malloc(sizeof(Node));
+
+  if (new) {
+    new->value = num;
+
+    if (*list == NULL) {
+      new->next = NULL;
+      *list = new;
+    }
+    else if (new->value < (*list)->value) {
+      new->next = *list;
+      *list = new;
+    }
+    else {
+      aux = *list;
+      while (aux->next && new->value > aux->next->value)
+        aux = aux->next;
+
+      new->next = aux->next;
+      aux->next = new;
+    }
+  }
+  else {
+    printf("\nErro ao alocar memoria.\n");
+  }
+}
+
 void printList(Node * list) {
   printf("\nList: ");
   while (list) {
@@ -85,11 +113,11 @@ void printList(Node * list) {
 int main() {
   setlocale(LC_ALL, "Portuguese");
 
-  int code, value, before;
+  int code, value, element;
   Node * list = NULL;
 
   do {
-    printf("\n\t0 - Sair\n\t1 - InserirI\n\t2 - inserirF\n\t3 - InserirM\n\t4 - Imprimir\n");
+    printf("\n\t0 - Sair\n\t1 - InserirI\n\t2 - InserirF\n\t3 - InserirM\n\t4 - InserirOrdenado\n\t5 - Imprimir\n");
     printf("Code: ");
     scanf("%d", &code);
 
@@ -110,12 +138,19 @@ int main() {
 
     case 3:
       printf("Digite um valor e o valor de referencia: ");
-      scanf("%d%d", &value, &before);
+      scanf("%d%d", &value, &element);
 
-      insertMiddle(&list, value, before);
+      insertMiddle(&list, value, element);
       break;
 
     case 4:
+      printf("Digite um valor: ");
+      scanf("%d", &value);
+
+      insertSequence(&list, value);
+      break;
+
+    case 5:
       printList(list);
       break;
 
