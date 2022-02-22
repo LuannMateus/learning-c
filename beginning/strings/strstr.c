@@ -10,6 +10,7 @@
 */
 
 int main() {
+  char * string = "HELLo";
   char word[50] = { "Hello World!" }, str[] = { "Hello" };
   char * pointer;
 

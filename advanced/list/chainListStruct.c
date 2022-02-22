@@ -7,31 +7,42 @@ typedef struct node {
   struct node * next;
 } Node;
 
-void insertBeginning(Node ** list, int num) {
+typedef struct list {
+  int tam;
+  struct node * begin;
+} List;
+
+void createList(List * list) {
+  list->begin = NULL;
+  list->tam = 0;
+}
+
+void insertBeginning(List * list, int num) {
   Node * new = malloc(sizeof(Node));
 
   if (new) {
     new->value = num;
-    new->next = *list;
-    *list = new;
+    new->next = list->begin;
+    list->begin = new;
+    list->tam++;
   }
   else {
     printf("\nErro ao alocar memoria.\n");
   }
 }
 
-void insertEnd(Node ** list, int num) {
+void insertEnd(List * list, int num) {
   Node * aux, * new = malloc(sizeof(Node));
 
   if (new) {
     new->value = num;
     new->next = NULL;
 
-    if (*list == NULL) {
-      *list = new;
+    if (list->begin == NULL) {
+      list->begin = new;
     }
     else {
-      aux = *list;
+      aux = list->begin;
 
       while (aux->next)
         aux = aux->next;
@@ -39,6 +50,8 @@ void insertEnd(Node ** list, int num) {
       aux->next = new;
     }
 
+    list->tam++;
+
   }
   else {
     printf("\nErro ao alocar memoria.\n");
@@ -46,19 +59,18 @@ void insertEnd(Node ** list, int num) {
 
 }
 
-void insertMiddle(Node ** list, int num, int element) {
+void insertMiddle(List * list, int num, int element) {
   Node * aux, * new = malloc(sizeof(Node));
 
   if (new) {
     new->value = num;
 
-    if (*list == NULL) {
+    if (list->begin == NULL) {
       new->next = NULL;
-      *list = new;
+      list->begin = new;
     }
     else {
-      printf("%d", element);
-      aux = *list;
+      aux = list->begin;
 
       while (aux->value != element && aux->next)
         aux = aux->next;
@@ -67,17 +79,20 @@ void insertMiddle(Node ** list, int num, int element) {
       aux->next = new;
     }
 
+    list->tam++;
   }
   else {
     printf("\nErro ao alocar memoria.\n");
   }
 }
 
-void printList(Node * list) {
-  printf("\nList: ");
-  while (list) {
-    printf("%d ", list->value);
-    list = list->next;
+void printList(List list) {
+  Node * node = list.begin;
+
+  printf("\nList tam %d: ", list.tam);
+  while (node) {
+    printf("%d ", node->value);
+    node = node->next;
   }
   printf("\n\n");
 }
@@ -86,7 +101,9 @@ int main() {
   setlocale(LC_ALL, "Portuguese");
 
   int code, value, before;
-  Node * list = NULL;
+  List list;
+
+  createList(&list);
 
   do {
     printf("\n\t0 - Sair\n\t1 - InserirI\n\t2 - inserirF\n\t3 - InserirM\n\t4 - Imprimir\n");
