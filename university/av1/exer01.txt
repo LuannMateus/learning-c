@@ -1,0 +1,24 @@
+Questão 01 - Explique a diferença entre:
+
+  p++; (*p)++; *(p++);
+
+  a) Qual é a diferença entre os comandos acima?
+  
+     O primeiro comando é um incremento de ponteiros, onde ao ser incrementado, ele passará a apontar para o próximo valor de mesmo tipo em relação ao valor para qual o ponteiro aponta.
+     O segundo comando, é o incremento do conteúdo da variável apontado pelo ponteiro.
+     O terceiro comando, é uma aritmética de ponteiros, onde retorna o conteúdo da variável do próximo ponteiro, do mesmo tipo em relação ao valor para qual o ponteiro aponta.
+
+  b) O que quer dizer *(p+10)?
+
+    Os ponteiros são variáveis que armazenam endereços na memória ram, 
+    onde a memória ram pode ser vista de forma exemplificada como uma espécie de array, 
+    onde cada espaço é um índice na memória. Ao utilizar-se do comando acima, será 
+    dado um offset de dez posições, ou seja, na referência inicial do ponteiro, será deslocado 
+    10 posições para direita, saindo da posições x para y, retornando o conteúdo da variável apontada pelo ponteiro, mas vale notar que isso não ocorre byte a byte e sim pelo tipo primitivo apontado pelo ponteiro, ou seja, se o ponteiro aponta para um inteiro, cada offset será de 4 bytes e assim por diante para os outros tipos primitivos. Esse tipo de comando, é chamado de aritmética de ponteiros.
+
+  c) Explique o que você entendeu da comparação entre ponteiros.
+
+    Todos os comandos acima, utilizam o conceito de aritmética de ponteiros, utilizando-se do 
+    símbolo matemático para realizar deslocamentos na memória. Os comandos acima podem ser divididos em três objetivos. O primeiro é utilizado para deslocar o ponteiro para o próximo ponteiro de mesmo tipo. O segundo é utilizado para incrementar o conteúdo da variável apontada pelo ponteiro. 
+    Por fim, o último é utilizado para retorna o conteúdo da variável do próximo ponteiro de mesmo tipo 
+    apontado pelo ponteiro. 
