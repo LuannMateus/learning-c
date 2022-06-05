@@ -106,7 +106,7 @@ int main() {
 
   do {
     printf("\n0 - Sair\n1 - Inserir\n2 - Remover\n3 - Listar\n4 - Inserir com prioridade\n");
-    printf("\nOpção: ");
+    printf("\nOpï¿½ï¿½o: ");
     scanf("%d", &code);
 
     switch (code)
@@ -137,7 +137,7 @@ int main() {
       break;
     default:
       if (code != 0) {
-        printf("\nValor inválido!");
+        printf("\nValor invï¿½lido!");
       }
 
       break;
